@@ -67,9 +67,23 @@ for table in html_tuple:
             tables[-1].append(cleaned_row)
 
 
-def convert_weighted_to_atomic(table):
-    return [print(a) for a in zip(*table)]
+def zip_by_element(table):
+    return [a for a in zip(*table)]
 
-#
+
+spectrus = []
+
 for table in tables:
-    convert_weighted_to_atomic(table)
+    spectrus.append(zip_by_element(table))
+
+atomic_weight = []
+
+
+def convert_to_atomic(spectre):
+    print(spectre)
+
+
+for spectre in spectrus:
+    convert_to_atomic(spectre)
+
+
