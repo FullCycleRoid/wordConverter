@@ -2,6 +2,7 @@ import re
 import mammoth
 from atom_weight import atom_weight
 from bs4 import BeautifulSoup
+import docx
 
 
 forbidden_words = ['Макс.', 'Среднее', 'Станд. отклонение', 'стат.', 'отклонение', 'Станд.', 'Мин.']
@@ -152,3 +153,14 @@ for table in temp_table:
         current_row = 1
     final_table.append(new_table)
 print(final_table)
+
+
+source_document = docx.Document("138.docx")
+target_document = docx.Document()
+
+p = source_document.add_paragraph()
+r = p.add_run()
+r.add_text('Good Morning every body,This is my ')
+r.add_picture('12345.jpg')
+r.add_text(' do you like it?')
+source_document.save("test.docx")
