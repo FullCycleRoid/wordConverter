@@ -158,9 +158,12 @@ print(final_table)
 source_document = docx.Document("138.docx")
 target_document = docx.Document()
 
-p = source_document.add_paragraph()
-r = p.add_run()
-r.add_text('Good Morning every body,This is my ')
-r.add_picture('12345.jpg')
-r.add_text(' do you like it?')
+
+for table in tables:
+    p = source_document.add_paragraph()
+    r = p.add_run()
+    rows = len(table)
+    cols = len(table[0])
+    r.add_table(rows=rows, cols=cols)
+
 source_document.save("test.docx")
