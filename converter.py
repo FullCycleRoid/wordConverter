@@ -155,15 +155,17 @@ for table in temp_table:
 print(final_table)
 
 
-source_document = docx.Document("138.docx")
-target_document = docx.Document()
+new_document = docx.Document()
 
-
-for table in tables:
-    p = source_document.add_paragraph()
-    r = p.add_run()
+for table in final_table:
     rows = len(table)
     cols = len(table[0])
-    r.add_table(rows=rows, cols=cols)
+    new_table = new_document.add_table(rows=rows, cols=cols)
+    title_row = new_table.rows[0]
 
-source_document.save("test.docx")
+    row_position = 0
+    col_position = 0
+    for col in range(cols):
+       col.cells[col_position] = table[]
+
+new_document.save("test.docx")
