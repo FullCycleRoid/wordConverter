@@ -1,8 +1,12 @@
 import re
 import mammoth
+from docx.shared import Inches
+
 from atom_weight import atom_weight
 from bs4 import BeautifulSoup
 import docx
+from docx.enum.style import WD_STYLE_TYPE
+
 
 
 forbidden_words = ['Макс.', 'Среднее', 'Станд. отклонение', 'стат.', 'отклонение', 'Станд.', 'Мин.']
@@ -155,17 +159,24 @@ for table in temp_table:
 print(final_table)
 
 
-new_document = docx.Document()
+new_document = docx.Document("138.docx")
+new_document.add_page_break()
+new_document.add_paragraph("Значения в атомных %")
 
 for table in final_table:
     rows = len(table)
     cols = len(table[0])
-    new_table = new_document.add_table(rows=rows, cols=cols)
-    title_row = new_table.rows[0]
+    created_table = new_document.add_table(rows=rows, cols=cols)
+    created_table.style.name = "Table Grid"
 
-    row_position = 0
-    col_position = 0
-    for col in range(cols):
-       col.cells[col_position] = table[]
+    for row_position in range(rows):
+        table_row = created_table.rows[row_position].cells
+        for col_position in range(cols):
+            if col_position == 0:
+                table_row[col_position].width = Inches(3)
+                table_row[col_position].text = str(table[row_position][col_position])
 
-new_document.save("test.docx")
+            table_row[col_position].text = str(table[row_position][col_position])
+    new_document.add_paragraph("              ")
+
+    new_document.save("138.docx")
